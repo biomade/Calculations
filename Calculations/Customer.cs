@@ -6,5 +6,7 @@ namespace Calculations
 {
     public class Customer
     {
+        public string Name => "Laurie";
+        public int Age => 35;
     }
 }

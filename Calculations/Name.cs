@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Calculations
 {
-    public class Names
+    public class Name
     {
         public string MakeFullName(string first, string last)
         {

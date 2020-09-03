@@ -27,5 +27,35 @@ namespace XUnitCalculations.Test
             //result = calc.AddDouble(1.23, 2.34);
             //Assert.Equal(3.57, result, 1); //rounds up
         }
+
+        [Fact]
+        public void FiboNumbers_DoesNotIncludeZero()
+        {
+            var calc = new Calculator();
+            Assert.All(calc.FiboNumbers, n => Assert.NotEqual(0, n));
+        }
+
+        [Fact]
+        public void FiboNumbers_Includes13()
+        {
+            var calc = new Calculator();
+            Assert.Contains(13, calc.FiboNumbers);
+        }
+
+        [Fact]
+        public void FiboNumbers_DoesNotInclude4()
+        {
+            var calc = new Calculator();
+            Assert.DoesNotContain(4, calc.FiboNumbers);
+        }
+
+        [Fact]
+        public void FiboNumbers_ExactCollection()
+        {
+            var calc = new Calculator();
+            var lstExpected = new List<int> { 1, 1, 2, 3, 5, 8, 13 };
+
+            Assert.Equal(lstExpected, calc.FiboNumbers);
+        }
     }
 }

@@ -5,12 +5,12 @@ using Xunit;
 
 namespace XUnitCalculations.Test
 {
-   public class NamesTests
+   public class NameTests
     {
         [Fact]
         public void MakeFullNameTest()
         {
-            var name = new Calculations.Names();
+            var name = new Calculations.Name();
             var result = name.MakeFullName("Laurie", "Kern");
             //Assert.Equal("Laurie Kern", result);
 
@@ -30,14 +30,14 @@ namespace XUnitCalculations.Test
         [Fact]
         public void NickName_MustBeNull()
         {
-            var name = new Calculations.Names();
+            var name = new Calculations.Name();
             Assert.Null(name.NickName);
         }
 
         [Fact]
         public void NickName_MustBeNotNull()
         {
-            var name = new Calculations.Names();
+            var name = new Calculations.Name();
             name.NickName = "laur";
             Assert.NotNull(name.NickName);
         }
@@ -45,7 +45,7 @@ namespace XUnitCalculations.Test
         [Fact]
         public void MakeFullName_AlwaysReturnValue()
         {
-            var name = new Calculations.Names();
+            var name = new Calculations.Name();
             var result = name.MakeFullName("Laurie", "Kern");
             Assert.NotNull(result);
             Assert.False(string.IsNullOrEmpty(result)); //so it can't be empty

@@ -9,7 +9,7 @@ namespace Calculations
        // public string Name => "Laurie";
         public int Age => 35;
 
-        public int GetOrdersByName (string name)
+        public int GetOrdersByName(string name)
         {
             if (string.IsNullOrEmpty(name)){
                 throw new ArgumentException("An exception has been thrown!");

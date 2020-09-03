@@ -41,5 +41,13 @@ namespace XUnitCalculations.Test
             Assert.Equal("An exception has been thrown!", exceptDetails.Message);
         }
 
+
+        [Fact]
+        public void LoyalCustomer_ForOrdersGT100()
+        {
+            var cust = CustomerFactory.CreateCustomerInstance(102);
+            var loyalCustom = Assert.IsType<LoyalCustomer>(cust);
+            Assert.Equal(10, loyalCustom.Discount);
+        }
     }
 }

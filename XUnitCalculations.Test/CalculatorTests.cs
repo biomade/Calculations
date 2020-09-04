@@ -36,6 +36,7 @@ namespace XUnitCalculations.Test
         }
 
         [Fact]
+        [Trait("Category", "Fibo")]
         public void FiboNumbers_Includes13()
         {
             var calc = new Calculator();
@@ -43,6 +44,7 @@ namespace XUnitCalculations.Test
         }
 
         [Fact]
+        [Trait("Category", "Fibo")]
         public void FiboNumbers_DoesNotInclude4()
         {
             var calc = new Calculator();
@@ -50,6 +52,7 @@ namespace XUnitCalculations.Test
         }
 
         [Fact]
+        [Trait("Category", "Fibo")]
         public void FiboNumbers_ExactCollection()
         {
             var calc = new Calculator();

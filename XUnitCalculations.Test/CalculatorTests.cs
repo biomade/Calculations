@@ -6,8 +6,29 @@ using Xunit;
 
 namespace XUnitCalculations.Test
 {
-    public class CalculatorTests
+    public class CalculatorFixture:IDisposable
     {
+        public Calculator Calc => new Calculator();
+
+        public void Dispose()
+        {
+            //clean up 
+        }
+    }
+
+    public interface ICalculatorFixture<T>
+    {
+    }
+
+    public class CalculatorTests: ICalculatorFixture<CalculatorFixture>
+    {
+        //constructor with DI for text fixture
+        private CalculatorFixture _calculatorFixture;
+       public CalculatorTests(CalculatorFixture calculatorFixture)
+        {
+            _calculatorFixture = calculatorFixture;
+        }
+       
         [Fact]
         public void Add_GivenTwoIntValues_ReturnsIntSum()
         {
@@ -29,9 +50,10 @@ namespace XUnitCalculations.Test
         }
 
         [Fact]
+        [Trait("Category", "Fibo")]
         public void FiboNumbers_DoesNotIncludeZero()
         {
-            var calc = new Calculator();
+            var calc = _calculatorFixture.Calc;
             Assert.All(calc.FiboNumbers, n => Assert.NotEqual(0, n));
         }
 
@@ -39,7 +61,7 @@ namespace XUnitCalculations.Test
         [Trait("Category", "Fibo")]
         public void FiboNumbers_Includes13()
         {
-            var calc = new Calculator();
+            var calc = _calculatorFixture.Calc;
             Assert.Contains(13, calc.FiboNumbers);
         }
 
@@ -47,7 +69,7 @@ namespace XUnitCalculations.Test
         [Trait("Category", "Fibo")]
         public void FiboNumbers_DoesNotInclude4()
         {
-            var calc = new Calculator();
+            var calc = _calculatorFixture.Calc;
             Assert.DoesNotContain(4, calc.FiboNumbers);
         }
 
@@ -55,10 +77,11 @@ namespace XUnitCalculations.Test
         [Trait("Category", "Fibo")]
         public void FiboNumbers_ExactCollection()
         {
-            var calc = new Calculator();
+            var calc = _calculatorFixture.Calc;
             var lstExpected = new List<int> { 1, 1, 2, 3, 5, 8, 13 };
 
             Assert.Equal(lstExpected, calc.FiboNumbers);
         }
     }
+
 }

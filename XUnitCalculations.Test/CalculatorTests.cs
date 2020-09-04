@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace XUnitCalculations.Test
 {
@@ -16,17 +17,16 @@ namespace XUnitCalculations.Test
         }
     }
 
-    public interface ICalculatorFixture<T>
-    {
-    }
-
-    public class CalculatorTests: ICalculatorFixture<CalculatorFixture>
+    public class CalculatorTests: IClassFixture<CalculatorFixture>
     {
         //constructor with DI for text fixture
-        private CalculatorFixture _calculatorFixture;
-       public CalculatorTests(CalculatorFixture calculatorFixture)
+        private readonly CalculatorFixture _calculatorFixture;
+        private readonly ITestOutputHelper _testOutputHelper;
+       public CalculatorTests(CalculatorFixture calculatorFixture, ITestOutputHelper testOutputHelper)
         {
             _calculatorFixture = calculatorFixture;
+            _testOutputHelper = testOutputHelper;
+            _testOutputHelper.WriteLine("Contstructor");
         }
        
         [Fact]
@@ -53,6 +53,7 @@ namespace XUnitCalculations.Test
         [Trait("Category", "Fibo")]
         public void FiboNumbers_DoesNotIncludeZero()
         {
+            _testOutputHelper.WriteLine("FiboNumbers_DoesNotIncludeZero");
             var calc = _calculatorFixture.Calc;
             Assert.All(calc.FiboNumbers, n => Assert.NotEqual(0, n));
         }
@@ -61,6 +62,7 @@ namespace XUnitCalculations.Test
         [Trait("Category", "Fibo")]
         public void FiboNumbers_Includes13()
         {
+            _testOutputHelper.WriteLine("FiboNumbers_Includes13");
             var calc = _calculatorFixture.Calc;
             Assert.Contains(13, calc.FiboNumbers);
         }
@@ -69,6 +71,7 @@ namespace XUnitCalculations.Test
         [Trait("Category", "Fibo")]
         public void FiboNumbers_DoesNotInclude4()
         {
+            _testOutputHelper.WriteLine("FiboNumbers_DoesNotInclude4");
             var calc = _calculatorFixture.Calc;
             Assert.DoesNotContain(4, calc.FiboNumbers);
         }
@@ -77,6 +80,7 @@ namespace XUnitCalculations.Test
         [Trait("Category", "Fibo")]
         public void FiboNumbers_ExactCollection()
         {
+            _testOutputHelper.WriteLine("FiboNumbers_ExactCollection");
             var calc = _calculatorFixture.Calc;
             var lstExpected = new List<int> { 1, 1, 2, 3, 5, 8, 13 };
 

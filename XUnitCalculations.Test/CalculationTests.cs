@@ -32,7 +32,7 @@ namespace XUnitCalculations.Test
         }
 
 
-            [Fact]
+        [Fact]
         [Trait("Category", "Fibo")]
         public void FiboNumbers_DoesNotIncludeZero()
         {
@@ -68,6 +68,32 @@ namespace XUnitCalculations.Test
             var lstExpected = new List<int> { 1, 1, 2, 3, 5, 8, 13 };
 
             Assert.Equal(lstExpected, calc.FiboNumbers);
+        }
+
+        [Fact]
+        public void IsOdd_GivenOddReturnsTrue()
+        {
+            var calc = new Calculation();
+            var result = calc.isOdd(1);
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void IsOdd_GivenEvenReturnsFalse()
+        {
+            var calc = new Calculation();
+            var result = calc.isOdd(2);
+            Assert.False(result);
+        }
+
+        [Theory]
+        [InlineData(1,true)]
+        [InlineData(2, false)]
+        public void IsOdd_TestOddAndEven(int value, bool expected)
+        {
+            var calc = new Calculation();
+            var result = calc.isOdd(value);
+            Assert.Equal(expected, result);
         }
     }
 }

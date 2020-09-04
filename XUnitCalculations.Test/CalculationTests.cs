@@ -95,5 +95,15 @@ namespace XUnitCalculations.Test
             var result = calc.isOdd(value);
             Assert.Equal(expected, result);
         }
+
+        [Theory]
+   
+        [MemberData(memberName: nameof(TestDataShare.IsOddOrEvenData), MemberType = typeof(TestDataShare))]
+        public void IsOdd_TestOddAndEven_2(int value, bool expected)
+        {
+            var calc = new Calculation();
+            var result = calc.isOdd(value);
+            Assert.Equal(expected, result);
+        }
     }
 }

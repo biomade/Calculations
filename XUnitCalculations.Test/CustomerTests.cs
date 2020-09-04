@@ -6,12 +6,21 @@ using Xunit;
 
 namespace XUnitCalculations.Test
 {
+    [Collection("Customer")] //for when you have more than one test class that will use the same fixture
     public class CustomerTests
     {
+        private readonly CustomerFixture _customerFixture;
+
+        public CustomerTests(CustomerFixture customerFixture)
+        {
+            _customerFixture = customerFixture;
+        }
+
         [Fact]
         public void Age_CorrectRange()
         {
-            var cust = new Customer();
+            //var cust = new Customer();
+            var cust = _customerFixture.Cust;
             Assert.InRange(cust.Age, 25, 40);
         }
 
@@ -40,7 +49,6 @@ namespace XUnitCalculations.Test
             var exceptDetails = Assert.Throws<ArgumentException>(() => cust.GetOrdersByName(null));
             Assert.Equal("An exception has been thrown!", exceptDetails.Message);
         }
-
 
         [Fact]
         public void LoyalCustomer_ForOrdersGT100()
